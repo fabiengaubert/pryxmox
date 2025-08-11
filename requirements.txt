@@ -1,0 +1,3 @@
+requests
+proxmoxer
+python-dotenv
