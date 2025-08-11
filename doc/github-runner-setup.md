@@ -52,7 +52,9 @@ tar xzf ./actions-runner-linux-x64-2.327.1.tar.gz
 Where:
 
 `<ORG>` = your GitHub account or organization name (e.g., fabiengaubert)
+
 `<REPO>` = your repository name (e.g., pryxmox)
+
 `<TOKEN>` = temporary token from GitHub
 
 
