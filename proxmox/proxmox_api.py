@@ -29,7 +29,7 @@ def connect_proxmox(config: dict) -> ProxmoxAPI:
     )
 
 
-def get_version_proxmox(proxmox: ProxmoxAPI) -> bool:
+def get_version_proxmox(proxmox: ProxmoxAPI) -> str:
     """
     Retrieves the version string of the connected Proxmox server.
 
@@ -97,3 +97,49 @@ def print_all_vms(proxmox: ProxmoxAPI) -> None:
         vms = list_vms(proxmox, node)
         print_vm_list(vms)
         print("\n")
+
+
+def start_vm(proxmox: ProxmoxAPI, node: str, vmid: int) -> None:
+    """
+    Starts a virtual machine on the specified Proxmox node.
+
+    Args:
+        proxmox (ProxmoxAPI): An authenticated ProxmoxAPI instance.
+        node (str): The name of the Proxmox node where the VM resides.
+        vmid (int): The VM ID of the virtual machine to start.
+
+    Returns:
+        None
+
+    Prints:
+        The response from the Proxmox API if the VM is started successfully.
+        An error message if the operation fails.
+    """
+    try:
+        response = proxmox.nodes(node).qemu(vmid).status.start.post()
+        print(f"VM {vmid} start response:", response)
+    except Exception as e:
+        print("Error starting VM:", e)
+
+
+def stop_vm(proxmox: ProxmoxAPI, node: str, vmid: int) -> None:
+    """
+    Stops a virtual machine on the specified Proxmox node.
+
+    Args:
+        proxmox (ProxmoxAPI): An authenticated ProxmoxAPI instance.
+        node (str): The name of the Proxmox node where the VM resides.
+        vmid (int): The VM ID of the virtual machine to stop.
+
+    Returns:
+        None
+
+    Prints:
+        The response from the Proxmox API if the VM is stopped successfully.
+        An error message if the operation fails.
+    """
+    try:
+        response = proxmox.nodes(node).qemu(vmid).status.stop.post()
+        print(f"VM {vmid} stop response:", response)
+    except Exception as e:
+        print(f"Error stopping VM {vmid} on node {node}: {e}")
