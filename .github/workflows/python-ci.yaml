@@ -31,4 +31,4 @@ jobs:
           PROXMOX_USER: ${{ secrets.PROXMOX_USER }}
           PROXMOX_TOKEN_NAME: ${{ secrets.PROXMOX_TOKEN_NAME }}
           PROXMOX_TOKEN_VALUE: ${{ secrets.PROXMOX_TOKEN_VALUE }}
-        run: python pryxmox.py
+        run: python pryxmox.py version

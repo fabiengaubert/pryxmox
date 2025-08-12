@@ -28,6 +28,9 @@ def pryxmox(args: argparse.Namespace) -> None:
         start_vm(proxmox, node=DEFAULT_NODE, vmid=args.name)
     elif args.command == "stop":
         stop_vm(proxmox, node=DEFAULT_NODE, vmid=args.name)
+    elif args.command == "version":
+        version = get_version_proxmox(proxmox)
+        print(f"Proxmox version: {version}")
 
 
 if __name__ == "__main__":
@@ -42,6 +45,8 @@ if __name__ == "__main__":
     p_stop.add_argument("name", help="Name or ID of the VM")
 
     p_list = subparsers.add_parser("list", help="List available VMs")
+
+    p_version = subparsers.add_parser("version", help="Get Proxmox server version")
 
     args = arg_parser.parse_args()
 
